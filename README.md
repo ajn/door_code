@@ -20,8 +20,10 @@ NOTE: This gem is not ready yet!
 
 ### To Do
 
+* Fix bug which allows everyone access when only one person enters the code (see next todo)
+* Set up Rack::Sessions to handle monitoring when the user enters the correct code
+* Set up Rack::Cookies for long-term rememberability (tied to Sessions)
 * Fix the bug causing the keypad to be shown again even after entering the correct code (reloading loads the site correctly)
-* Add cookies for long-term rememberability
 * Fix visual irregularities (ie positioning of numbers in the display)
 * Fix 'blue' version (doesn't always display)
 * Allow specifying a URL to restrict access conditionally
@@ -31,3 +33,4 @@ NOTE: This gem is not ready yet!
 * Add some sort of security to keep the PIN code safe & secure
 * Add no-js version of index.html
 * Extended browser support (requires PNG fixing)
+* Add favicon?
