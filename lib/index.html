@@ -1,0 +1,84 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Authorized Personnel Only</title>
+  <meta name="description" content="">
+  <meta name="author" content="Mike Fulcher">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+  
+  <script src="assets/js/scripts.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" type="text/css" media="screen" charset="utf-8">
+</head>
+
+
+<body>
+  
+  <div class="preload">
+    <!-- Keypad -->
+    <img src="assets/img/keypad/frame-330x430.png" />
+    <img src="assets/img/keypad/green-508x608.png" />
+    <img src="assets/img/keypad/blue-508x608.png" />
+    <img src="assets/img/keypad/red-508x608.png" />
+    <!-- LED -->
+    <img src="assets/img/led/1.png" />
+    <img src="assets/img/led/2.png" />
+    <img src="assets/img/led/3.png" />
+    <img src="assets/img/led/4.png" />
+    <img src="assets/img/led/5.png" />
+    <img src="assets/img/led/6.png" />
+    <img src="assets/img/led/7.png" />
+    <img src="assets/img/led/8.png" />
+    <img src="assets/img/led/9.png" />
+    <img src="assets/img/led/success.png" />
+    <img src="assets/img/led/error.png" />
+  </div>
+
+  <div id="container">
+    <form action="/" method="post" autocomplete="off">
+      <div id="display">
+        <!-- Holder for the display -->
+        <div rel="1" class="num one">1</div>
+        <div rel="2" class="num two">2</div>
+        <div rel="3" class="num three">3</div>
+        <div rel="4" class="num four">4</div>
+        <div rel="5" class="num five">5</div>
+        <div rel="6" class="num six">6</div>
+        <div rel="7" class="num seven">7</div>
+        <div rel="8" class="num eight">8</div>
+        <div rel="9" class="num nine">9</div>
+        <!-- Messages -->
+        <div class="msg success">success</div>
+        <div class="msg failure">failure</div>
+        <div class="clear"></div>
+      </div>
+      
+      <div id="keys">
+        <!-- Holder for the 9 keys -->
+        <a href="#" class="one row-top col-left">1</a>
+        <a href="#" class="two row-top col-center">2</a>
+        <a href="#" class="three row-top col-right">3</a>
+        <a href="#" class="four row-center col-left">4</a>
+        <a href="#" class="five row-center col-center">5</a>
+        <a href="#" class="six row-center col-right">6</a>
+        <a href="#" class="seven row-bottom col-left">7</a>
+        <a href="#" class="eight row-bottom col-center">8</a>
+        <a href="#" class="nine row-bottom col-right">9</a>
+        <div class="clear"></div>
+      </div>
+    </form>
+  </div> <!-- end of #container -->
+  
+</body>
+</html>

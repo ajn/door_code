@@ -1,0 +1,88 @@
+html, body { margin: 0; padding: 50px 0 0 0; }
+html { background: black url(../img/background.jpg) center top no-repeat; }
+
+.clear { clear: both; }
+
+.preload { height: 1px; width: 1px; position: absolute; left: -9999px; }
+
+#container {
+  width: 508px; height: 608px;
+  margin: 0 auto; padding: 0;
+  background: url(../img/keypad/green-508x608.png) center center no-repeat;
+}
+
+#container.success { background-image: url(../img/keypad/blue-508x608.png); }
+#container.failure { background-image: url(../img/keypad/red-508x608.png); }
+
+#container form {
+  width: 508px; height: 608px;
+  background: url(../img/keypad/frame-330x430.png) center center no-repeat;
+}
+
+#display {
+  background: none;
+  height: 61px; width: 306px;
+  margin: 0 auto; padding: 12px 0 13px 0;
+  position: relative;
+  top: 101px;
+  text-align: center;
+}
+
+#display div.msg {
+  text-indent: -9999px;
+  height: 61px; width: 100%;
+  margin: 0 auto; padding: 0;
+  display: none;
+}
+
+#display div.success { background: url(../img/led/success.png) center center no-repeat; }
+#display div.failure { background: url(../img/led/error.png) center center no-repeat; }
+
+#container.success #display div.success { display: block; }
+#container.failure #display div.failure { display: block; }
+
+#display div.num {
+  height: 61px; width: 32px;
+  text-indent: -9999px;
+  margin: 0 auto; padding: 0;
+  float: left; display: none;
+}
+
+#display div.one    { background: url(../img/led/1.png) center center no-repeat; }
+#display div.two    { background: url(../img/led/2.png) center center no-repeat; }
+#display div.three  { background: url(../img/led/3.png) center center no-repeat; }
+#display div.four   { background: url(../img/led/4.png) center center no-repeat; }
+#display div.five   { background: url(../img/led/5.png) center center no-repeat; }
+#display div.six    { background: url(../img/led/6.png) center center no-repeat; }
+#display div.seven  { background: url(../img/led/7.png) center center no-repeat; }
+#display div.eight  { background: url(../img/led/8.png) center center no-repeat; }
+#display div.nine   { background: url(../img/led/9.png) center center no-repeat; }
+
+#keys {
+  background: none;
+  height: 310px; width: 310px;
+  margin: 0 auto; padding: 0;
+  position: relative;
+  top: 113px;
+}
+
+#keys a {
+  display: block;
+  text-indent: -9999px;
+  height: 100px; width: 100px;
+  background: none;
+  position: relative;
+  float: left;
+  margin: 5px 0 0 5px;
+}
+
+#keys a.row-top { margin-top: 0; }
+#keys a.row-center {  }
+#keys a.row-bottom { margin-bottom: 0; }
+
+#keys a.col-left { margin-left: 0; }
+#keys a.col-center {  }
+#keys a.col-right { margin-right: 0; }
+
+#keys a:hover { background: url(../img/opacity/33.png) }
+#keys a:active { background: url(../img/opacity/50.png) }
