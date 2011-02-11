@@ -29,3 +29,4 @@ NOTE: This gem is not ready yet!
 * Validate the code passed to the middleware; revert to default if the code is invalid
 * Add some sort of security to keep the PIN code safe & secure
 * Add no-js version of index.html
+* Extended browser support (requires PNG fixing)
