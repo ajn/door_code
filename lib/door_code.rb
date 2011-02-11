@@ -7,16 +7,10 @@ module Rack
         @code = args[:code]
       end
   
-      def session
-        # Either retrieve the current session, get it from env, or initialize it
-        @session ||= @env['rack.door_code.session'] ||= {}
-      end
-  
       # Where the magic happens...
       def call(env)
         @env = env
         # Set up the session
-        session[:code] = @code
         # Build the request object for inspection
         request = Rack::Request.new(env)
         # Is it a GET? POST? Other?
@@ -36,17 +30,17 @@ module Rack
           # This will catch the session and call the app
           # *This is to reset the method from POST to GET, as Rails requires
           # an authenticity token for all POST requests
-          if request.params['code'] == session[:code]
-            session[:confirmed] = 'true'
+          if request.params['code'] == @code
+            @confirmed = 'true'
             return [301, {"Location" => '/'}, []] if !ajax
             return [200, {"Content-Type" => 'text/javascript'}, ['true']] if ajax
           else
-            session[:confirmed] = nil
+            @confirmed = nil
             return [403, {"Content-Type" => 'text/javascript'}, ['false']] if ajax
           end
         end
     
-        if session[:confirmed] == 'true'
+        if @confirmed == 'true'
           # This means the user has already confirmed the code, so
           # we proceed to the app
           @app.call(env)
