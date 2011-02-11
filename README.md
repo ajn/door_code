@@ -20,6 +20,7 @@ NOTE: This gem is not ready yet!
 
 ### To Do
 
+* Fix the bug causing the keypad to be shown again even after entering the correct code (reloading loads the site correctly)
 * Add cookies for long-term rememberability
 * Fix visual irregularities (ie positioning of numbers in the display)
 * Fix 'blue' version (doesn't always display)
