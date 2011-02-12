@@ -2,13 +2,21 @@ module Rack
   module DoorCode
     class RestrictedAccess
       
-      def initialize(app, args)
+      def initialize app, options={}
         @app = app  
-        @code = args[:code]
+        @code = options[:code].to_s
+        # @domains = options[:domains]
+        
+        check_code
+      end
+      
+      def check_code
+        parsed_code = @code.gsub(/(\D|0)/i)
+        @code = '12345' unless @code == parsed_code
       end
   
       # Where the magic happens...
-      def call(env)
+      def call env
         @env = env
         # Set up the session
         # Build the request object for inspection
