@@ -3,10 +3,10 @@ module Rack
     class RestrictedAccess
       
       def initialize app, options={}
-        @app = app  
-        @code = options[:code].to_s
-        # @domains = options[:domains]
-        
+        @app = app
+        @options = options
+        @code = @options[:code].to_s
+        # @domains = @options[:domains]
         check_code
       end
       
@@ -14,17 +14,21 @@ module Rack
         parsed_code = @code.gsub(/(\D|0)/i)
         @code = '12345' unless @code == parsed_code
       end
+      
+      def pre_confirmed?
+        @request.cookies['door_code'] == 'code:confirmed'
+      end
   
       # Where the magic happens...
       def call env
         @env = env
-        # Set up the session
         # Build the request object for inspection
-        request = Rack::Request.new(env)
+        @request = Rack::Request.new(env)
+        
         # Is it a GET? POST? Other?
-        verb = request.request_method
+        verb = @request.request_method
         # Where is this request going?
-        path = Rack::Utils.unescape(request.path_info)
+        path = Rack::Utils.unescape(@request.path_info)
         # What type of resource is the request fetching?
         # If no format is given, assume it's text/html (and that it's /index.html)
         ext = path.split('.').size > 1 ? path.split('.')[-1] : 'html'
@@ -33,24 +37,25 @@ module Rack
           
         if verb == "POST"
           ajax = env["HTTP_X_REQUESTED_WITH"] == "XMLHttpRequest"
-          # Validation time!
-          # If the code is confirmed, halt the request and reload as a GET request
-          # This will catch the session and call the app
-          # *This is to reset the method from POST to GET, as Rails requires
-          # an authenticity token for all POST requests
-          if request.params['code'] == @code
-            @confirmed = 'true'
-            status, headers, response = 301, {"Location" => '/'}, [] if !ajax
-            status, headers, response = 200, {"Content-Type" => 'text/javascript'}, ['true'] if ajax
-            return [status, headers, response]
+          confirmed = @request.params['code'] == @code
+          
+          if ajax
+            response = Rack::Response.new ["Success"], 200, {"Content-Type" => 'text/javascript'} if confirmed
+            response = Rack::Response.new ["Failure"], 403, {"Content-Type" => 'text/javascript'} if !confirmed
           else
-            @confirmed = nil
-            status, headers, response = 403, {"Content-Type" => 'text/javascript'}, ['false'] if ajax
-            return [status, headers, response]
+            response = Rack::Response.new ["Redirecting"], 301, {"Location" => '/'}
           end
+          
+          if confirmed
+            response.set_cookie('door_code', {:value => 'code:confirmed', :path => "/"})
+          else
+            response.delete_cookie('door_code')
+          end
+          
+          return response.finish
         end
     
-        if @confirmed == 'true'
+        if pre_confirmed?
           # This means the user has already confirmed the code, so
           # we proceed to the app
           status, headers, response = @app.call(env)
