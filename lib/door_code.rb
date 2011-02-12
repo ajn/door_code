@@ -42,9 +42,11 @@ module Rack
             @confirmed = 'true'
             status, headers, response = 301, {"Location" => '/'}, [] if !ajax
             status, headers, response = 200, {"Content-Type" => 'text/javascript'}, ['true'] if ajax
+            return [status, headers, response]
           else
             @confirmed = nil
             status, headers, response = 403, {"Content-Type" => 'text/javascript'}, ['false'] if ajax
+            return [status, headers, response]
           end
         end
     
