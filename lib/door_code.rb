@@ -41,7 +41,7 @@ module Rack
           
           if ajax
             response = Rack::Response.new ["Success"], 200, {"Content-Type" => 'text/javascript'} if confirmed
-            response = Rack::Response.new ["Failure"], 403, {"Content-Type" => 'text/javascript'} if !confirmed
+            response = Rack::Response.new ["Failure"], 200, {"Content-Type" => 'text/javascript'} if !confirmed
           else
             response = Rack::Response.new ["Redirecting"], 301, {"Location" => '/'}
           end
