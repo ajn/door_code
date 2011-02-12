@@ -3,7 +3,14 @@ html { background: black url(../img/background.jpg) center top no-repeat; }
 
 .clear { clear: both; }
 
-.preload { height: 1px; width: 1px; position: absolute; left: -9999px; }
+.preload {
+  position: absolute;
+  overflow: hidden;
+  left: -9999px;
+  top: -9999px;
+  height: 1px;
+  width: 1px;
+}
 
 #container {
   width: 508px; height: 608px;
