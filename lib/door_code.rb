@@ -32,31 +32,33 @@ module Rack
           # an authenticity token for all POST requests
           if request.params['code'] == @code
             @confirmed = 'true'
-            return [301, {"Location" => '/'}, []] if !ajax
-            return [200, {"Content-Type" => 'text/javascript'}, ['true']] if ajax
+            status, headers, response = 301, {"Location" => '/'}, [] if !ajax
+            status, headers, response = 200, {"Content-Type" => 'text/javascript'}, ['true'] if ajax
           else
             @confirmed = nil
-            return [403, {"Content-Type" => 'text/javascript'}, ['false']] if ajax
+            status, headers, response = 403, {"Content-Type" => 'text/javascript'}, ['false'] if ajax
           end
         end
     
         if @confirmed == 'true'
           # This means the user has already confirmed the code, so
           # we proceed to the app
-          @app.call(env)
+          status, headers, response = @app.call(env)
         else
           # Otherwise, we fetch the resource using this file (door_code.rb) as the root
           begin
             file = ::File.read(::File.dirname(__FILE__) + path)
-            [200, {"Content-Type" => mime}, [file]]
+            status, headers, response = 200, {"Content-Type" => mime}, [file]
           rescue # File not found - simply returns basic 404 (need to enhance this)
             not_found(mime)
           end
         end
+        
+        [status, headers, response]
       end
   
       def not_found mime
-        [404, {"Content-Type" => mime}, ["404!"]]
+        status, headers, response = 404, {"Content-Type" => mime}, ["404!"]
       end
       
     end
