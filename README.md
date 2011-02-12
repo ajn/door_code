@@ -1,5 +1,7 @@
 ### DoorCode. Restrict access with a 5-digit PIN code.
 
+- - -
+
 Install with Bundler:
 
     gem 'door_code', '0.0.1', :git => 'http://github.com/6twenty/door_code.git'
@@ -12,16 +14,15 @@ Or in application.rb (Rails3) or environment.rb (Rails2):
 
     config.middleware.use Rack::DoorCode::RestrictedAccess, :code => '12345'
 
+- - -
+
+### Notes
+
 * The default code is '12345'
 * If the code passed to DoorCode is invalid (eg contains non-digits), the default code will be assigned
+* ZERO is not a supported digit! Why? Because I forgot to add it to the keypad :(
 
-Note: ZERO is not a supported digit! Why? Because I forgot to add it to the keypad :(
-    
----
-
-NOTE: This gem is not ready yet!
-
----
+- - -
 
 ### To Do
 
